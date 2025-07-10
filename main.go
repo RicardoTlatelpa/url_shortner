@@ -3,14 +3,12 @@ package main
 import (
 	"log"
 	"net/http"
-	"sync"
-	"github.com/RicardoTlatelpa/uniqueidgen"
+
+	gen "github.com/RicardoTlatelpa/uniqueidgen"
 )
 
 var (
-	idGen *gen.Gen
-	store = make(map[string]string)
-	mu = sync.RWMutex{}
+	idGen *gen.Gen	
 	baseURL = "http://localhost:8080/"
 )
 
@@ -21,9 +19,11 @@ func main() {
 		log.Fatalf("failed to create generator: %v", err)
 	}
 
-	//http.HandleFunc("/shorten", handleShorten)
-	//http.HandleFunc("/", handleRedirect)
+	http.HandleFunc("/shorten", handleShorten)
+	http.HandleFunc("/", handleRedirect)
 
 	log.Println("server started at :8080")
-	log.Fatal(http.ListenAndServe(":8080",nil))
+	if err := http.ListenAndServe(":8080", nil); err != nil {
+		log.Fatalf("server error: %v", err)
+	}
 }
