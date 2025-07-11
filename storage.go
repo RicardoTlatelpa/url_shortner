@@ -1,21 +1,18 @@
 package main
 
-import "sync"
-
-var (
-    store = make(map[string]string)
-    mu    sync.RWMutex
+import (
+	"github.com/redis/go-redis/v9"
 )
-
-func Save(shortID, longURL string) {
-    mu.Lock()
-    defer mu.Unlock()
-    store[shortID] = longURL
+func Save(shortID, longURL string) error {
+	return redisClient.Set(ctx, shortID, longURL, 0).Err()
 }
 
 func Get(shortID string) (string, bool) {
-    mu.RLock()
-    defer mu.RUnlock()
-    url, ok := store[shortID]
-    return url, ok
-}
+	val, err := redisClient.Get(ctx, shortID).Result()
+	if err == redis.Nil {
+		return "", false
+	} else if err != nil {
+		return "", false
+	}
+	return val, true
+} 
