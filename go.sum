@@ -1,3 +1,5 @@
+github.com/RicardoTlatelpa/go-rate-limiter v0.0.0-20250603192313-2051e8c2d0bd h1:H+KY/nFgicQnCmvLCebpEt6WEuhbl5RQHYfULbcluiA=
+github.com/RicardoTlatelpa/go-rate-limiter v0.0.0-20250603192313-2051e8c2d0bd/go.mod h1:RT1ewIdgAt9Px5dyrQ1wTTC4Au8tZFtRCwq6OF9Kivk=
 github.com/RicardoTlatelpa/uniqueidgen v0.0.0-20250709025309-484af24c8f3f h1:c8Ybv8qs+J4OMAl9Q3hCoTzqt2nDuFmTQ4U7GERIjOM=
 github.com/RicardoTlatelpa/uniqueidgen v0.0.0-20250709025309-484af24c8f3f/go.mod h1:AO63Tw6jivDvNMIfUiThgv/FRHu7BOdOAhcUISOwQQE=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
