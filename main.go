@@ -38,7 +38,7 @@ func main() {
 
 	http.Handle("/shorten", shorten)
 	http.Handle("/", getURL)
-
+	http.HandleFunc("/stats/", handleStats)
 	log.Println("server started at :8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatalf("server error: %v", err)
