@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"strings"
 )
 
 type shortenRequest struct {
@@ -50,6 +51,16 @@ func handleRedirect(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w,r)
 		return
 	}
-
+	incrementClick(shortID)
 	http.Redirect(w,r, longURL, http.StatusFound)
+}
+
+func handleStats(w http.ResponseWriter, r *http.Request) {
+	shortID := strings.TrimPrefix(r.URL.Path, "/stats/")
+
+	clicks := getClicks(shortID)
+
+	resp := map[string]int64{"clicks": clicks}
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(resp)
 }
