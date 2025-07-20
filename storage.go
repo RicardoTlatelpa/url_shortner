@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/redis/go-redis/v9"
 )
 func Save(shortID, longURL string) error {
@@ -15,4 +16,19 @@ func Get(shortID string) (string, bool) {
 		return "", false
 	}
 	return val, true
-} 
+}
+
+func incrementClick(shortID string) {
+	key := fmt.Sprintf("clicks:%s", shortID)
+	redisClient.Incr(ctx, key)
+}
+
+func getClicks(shortID string) int64 {
+	key := fmt.Sprintf("clicks:%s", shortID)
+	val, err := redisClient.Get(ctx, key).Int64()
+
+	if err != nil {
+		return 0
+	}
+	return val
+}
